@@ -1,0 +1,26 @@
+*** Settings ***
+Library          Selenium2Library
+Suite Teardown   Close All Browsers
+*** Variables ***
+${GOOGLE URL}    http://www.google.co.th
+
+*** Testcases ***
+Rule Search data form google
+	[Template]    Flow ของการค้นหาข้อมูล
+		robot            robot
+		robotframework   robotframework
+	
+*** Keywords ***
+Flow ของการค้นหาข้อมูล
+	[Arguments]    ${keyword}    ${expected result}
+	ค้นหา     ${keyword}
+	เจอคำว่า   ${expected result}
+
+ค้นหา
+	[Arguments]     ${keyword}
+	Open Browser    ${GOOGLE URL}
+	Input Text      gbqfq    ${keyword}
+	Click Button    gbqfb
+เจอคำว่า
+	[Arguments]     ${expected result}
+	Wait Until Page Contains    ${expected result}
