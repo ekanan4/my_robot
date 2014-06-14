@@ -1,0 +1,23 @@
+*** Settings ***
+Library          Selenium2Library
+Suite Teardown   Close Browser
+*** Variables ***
+${GOOGLE URL}    http://www.google.co.th
+
+*** Testcases ***
+Search from google
+	ค้นหา     robot
+	เจอคำว่า   robot
+Search from google with robotframework
+	ค้นหา     robotframework
+	เจอคำว่า   robotframework
+	
+*** Keywords ***
+ค้นหา
+	[Arguments]     ${keyword}
+	Open Browser    ${GOOGLE URL}
+	Input Text      gbqfq    ${keyword}
+	Click Button    gbqfb
+เจอคำว่า
+	[Arguments]     ${expected result}
+	Wait Until Page Contains    ${expected result}
